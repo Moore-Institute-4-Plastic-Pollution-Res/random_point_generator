@@ -102,8 +102,15 @@ function downloadCSV(points) {
   saveAs(blob, 'random_points.csv');
 }
 
-document.getElementById('downloadBtn').addEventListener('click', function() {
-  var geojson = userPolygon.toGeoJSON();
-  var points = generateRandomPoints(geojson.geometry, 30);
-  downloadCSV(points);
+// Instructions Modal Functionality
+var instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'), {});
+var instructionsBtn = document.getElementById('instructionsBtn');
+
+instructionsBtn.addEventListener('click', function() {
+  instructionsModal.show();
+});
+
+// Report Issue Button Functionality
+document.getElementById('reportIssueBtn').addEventListener('click', function() {
+  window.open('https://github.com/wincowgerDEV/mapRPG/issues', '_blank');
 });

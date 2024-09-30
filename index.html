@@ -4,21 +4,45 @@
   <title>Random Point Generator</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Draw CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
-  <style>
-    #map { height: 600px; }
-    .controls { margin: 10px; }
-  </style>
-  <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+    <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
 </head>
 <body>
-  <div class="controls">
-    <button id="downloadBtn" disabled>Download CSV</button>
-  </div>
+  <header>
+    <h1>Random Point Generator</h1>
+    <div class="header-buttons">
+      <button id="instructionsBtn">Instructions</button>
+      <button id="downloadBtn" disabled>Download CSV</button>
+      <button id="reportIssueBtn">Report Issue</button>
+    </div>
+  </header>
   <div id="map"></div>
+  
+  <!-- Instructions Modal -->
+  <div id="instructionsModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>How to Use the App</h2>
+      <p>
+        <ul>
+          <li>Use the drawing tools on the map to create a polygon.</li>
+          <li>Once the polygon is drawn, the "Download CSV" button will be enabled.</li>
+          <li>Click "Download CSV" to get 30 random points within your polygon.</li>
+          <li>To report issues or feedback, click "Report Issue".</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  
   <!-- Ethical Ads Script -->
-  <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+    <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+  
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
   <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
@@ -26,3 +50,99 @@
   <script src="app.js"></script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Random Point Generator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Generate random geographic points within a user-defined area. Useful for sampling, simulations, and data analysis.">
+  <meta name="keywords" content="random points, geographic points, sampling, data analysis, GIS, map tool, random point generator">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Draw CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+  <!-- Custom CSS (if any additional styling is needed) -->
+  <style>
+    /* Map Styling */
+    #map {
+      height: calc(100vh - 70px); /* Adjust height based on header */
+    }
+    /* Adjust Leaflet Draw toolbar position */
+    .leaflet-draw-toolbar {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+      <!-- Ethical Ads Script -->
+    <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Random Point Generator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons" aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarButtons">
+        <div class="ms-auto navbar-nav">
+          <div class="d-flex align-items-center me-2 mb-2 mb-lg-0">
+            <label for="numPoints" class="text-white me-2 mb-0">Number of Points:</label>
+            <input type="number" id="numPoints" class="form-control" value="30" min="1" style="width: 80px;">
+          </div>
+          <button id="instructionsBtn" class="btn btn-outline-light me-2 mb-2 mb-lg-0">Instructions</button>
+          <button id="downloadBtn" class="btn btn-outline-light me-2 mb-2 mb-lg-0" disabled>Download CSV</button>
+          <button id="reportIssueBtn" class="btn btn-outline-light mb-2 mb-lg-0">Report Issue</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="map"></div>
+
+  <!-- Instructions Modal -->
+  <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">How to Use the App</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>Use the drawing tools on the map to create a polygon.</li>
+            <li>Once the polygon is drawn, the "Download CSV" button will be enabled.</li>
+            <li>Select the number of random points you want to generate.</li>
+            <li>Click "Download CSV" to get random points within your polygon.</li>
+            <li>To report issues or feedback, click "Report Issue".</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ethical Ads Script -->
+  <!-- Place your Ethical Ads code here -->
+
+  <!-- Scripts -->
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet Draw JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <!-- Turf.js -->
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+  <!-- FileSaver.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="app.js"></script>
+</body>
+</html>
+
