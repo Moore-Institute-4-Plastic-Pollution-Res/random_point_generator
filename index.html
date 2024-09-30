@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Point Generator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <style>
+    #map { height: 600px; }
+    .controls { margin: 10px; }
+  </style>
+  <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+</head>
+<body>
+  <div class="controls">
+    <button id="downloadBtn" disabled>Download CSV</button>
+  </div>
+  <div id="map"></div>
+  <!-- Ethical Ads Script -->
+  <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
