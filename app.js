@@ -1,10 +1,21 @@
 // Initialize the map
 var map = L.map('map').setView([0, 0], 2);
 
-// Add OpenStreetMap tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+// Base layers
+var baseLayers = {
+  "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }),
+  "Satellite": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri'
+  })
+};
+
+// Add default base layer
+baseLayers["OpenStreetMap"].addTo(map);
+
+// Layer control for basemaps
+L.control.layers(baseLayers).addTo(map);
 
 // Feature Group to store editable layers
 var drawnItems = new L.FeatureGroup();
@@ -80,7 +91,7 @@ function generateRandomPoints(polygon, numPoints) {
       randomPoints.features.push(point);
     }
 
-    // Filter points within the polygon
+    // Filter points within the main polygon
     var ptsWithin = turf.pointsWithinPolygon(randomPoints, polygon);
 
     ptsWithin.features.forEach(function(feature) {
@@ -99,6 +110,7 @@ function generateRandomPoints(polygon, numPoints) {
   return points;
 }
 
+// Download the points as a CSV file
 function downloadCSV(points) {
   var csvContent = "point_number,latitude,longitude\n";
   points.forEach(function(point, index) {
@@ -113,6 +125,8 @@ function plotPointsOnMap(points) {
   // Clear existing markers
   pointMarkers.clearLayers();
 
+  var latLngs = [];
+
   // Add new markers
   points.forEach(function(coord) {
     var marker = L.circleMarker([coord[1], coord[0]], {
@@ -124,7 +138,14 @@ function plotPointsOnMap(points) {
       fillOpacity: 0.8
     });
     pointMarkers.addLayer(marker);
+    latLngs.push([coord[1], coord[0]]);
   });
+
+  // Adjust map view to fit the points
+  if (latLngs.length > 0) {
+    var bounds = L.latLngBounds(latLngs);
+    map.fitBounds(bounds);
+  }
 }
 
 // Instructions Modal Functionality
@@ -140,7 +161,13 @@ document.getElementById('reportIssueBtn').addEventListener('click', function() {
   window.open('https://github.com/wincowgerDEV/mapRPG/issues', '_blank');
 });
 
+// Handle the Download CSV button click
 document.getElementById('downloadBtn').addEventListener('click', function() {
+  if (!userPolygon) {
+    alert('Please draw a polygon first.');
+    return;
+  }
+
   var geojson = userPolygon.toGeoJSON();
   var numPointsInput = document.getElementById('numPoints').value;
   var numPoints = parseInt(numPointsInput, 10);
