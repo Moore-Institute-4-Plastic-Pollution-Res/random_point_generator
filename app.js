@@ -114,3 +114,17 @@ instructionsBtn.addEventListener('click', function() {
 document.getElementById('reportIssueBtn').addEventListener('click', function() {
   window.open('https://github.com/wincowgerDEV/mapRPG/issues', '_blank');
 });
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+  var geojson = userPolygon.toGeoJSON();
+  var numPointsInput = document.getElementById('numPoints').value;
+  var numPoints = parseInt(numPointsInput, 10);
+
+  if (isNaN(numPoints) || numPoints < 1) {
+    alert('Please enter a valid number of points (minimum 1).');
+    return;
+  }
+
+  var points = generateRandomPoints(geojson.geometry, numPoints);
+  downloadCSV(points);
+});

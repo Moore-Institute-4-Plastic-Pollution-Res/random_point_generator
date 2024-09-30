@@ -1,57 +1,4 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Random Point Generator</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- Leaflet Draw CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="styles.css" />
-    <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
-</head>
-<body>
-  <header>
-    <h1>Random Point Generator</h1>
-    <div class="header-buttons">
-      <button id="instructionsBtn">Instructions</button>
-      <button id="downloadBtn" disabled>Download CSV</button>
-      <button id="reportIssueBtn">Report Issue</button>
-    </div>
-  </header>
-  <div id="map"></div>
-  
-  <!-- Instructions Modal -->
-  <div id="instructionsModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>How to Use the App</h2>
-      <p>
-        <ul>
-          <li>Use the drawing tools on the map to create a polygon.</li>
-          <li>Once the polygon is drawn, the "Download CSV" button will be enabled.</li>
-          <li>Click "Download CSV" to get 30 random points within your polygon.</li>
-          <li>To report issues or feedback, click "Report Issue".</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-  
-  <!-- Ethical Ads Script -->
-    <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
-  
-  <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Random Point Generator</title>
@@ -62,13 +9,27 @@
   <meta name="description" content="Generate random geographic points within a user-defined area. Useful for sampling, simulations, and data analysis.">
   <meta name="keywords" content="random points, geographic points, sampling, data analysis, GIS, map tool, random point generator">
 
+  <!-- Open Graph Meta Tags (Optional) -->
+  <meta property="og:title" content="Random Point Generator">
+  <meta property="og:description" content="Generate random geographic points within a user-defined area.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/">
+  <!-- Replace with your image URL -->
+  <meta property="og:image" content="https://yourdomain.com/path-to-image.jpg">
+
+  <!-- Favicon (Optional) -->
+  <!-- <link rel="icon" href="/path-to-favicon.ico"> -->
+
+  <!-- Ethical Ads Script in the Head -->
+  <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- Leaflet Draw CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+  
   <!-- Custom CSS (if any additional styling is needed) -->
   <style>
     /* Map Styling */
@@ -82,8 +43,9 @@
   </style>
 </head>
 <body>
-      <!-- Ethical Ads Script -->
-    <div class = "dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+  <!-- Ethical Ads Script in the Body -->
+  <div class="dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Random Point Generator</a>
@@ -126,9 +88,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Ethical Ads Script -->
-  <!-- Place your Ethical Ads code here -->
 
   <!-- Scripts -->
   <!-- Leaflet JS -->
