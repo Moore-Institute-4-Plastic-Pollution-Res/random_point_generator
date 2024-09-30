@@ -10,6 +10,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
+// Layer Group to store point markers
+var pointMarkers = L.layerGroup().addTo(map);
+
 // Initialize the draw control
 var drawControl = new L.Control.Draw({
   draw: {
@@ -32,6 +35,9 @@ map.on(L.Draw.Event.CREATED, function (e) {
   userPolygon = e.layer;
   drawnItems.addLayer(userPolygon);
   document.getElementById('downloadBtn').disabled = false;
+
+  // Clear existing point markers
+  pointMarkers.clearLayers();
 });
 
 function generateRandomPoints(polygon, numPoints) {
@@ -102,6 +108,25 @@ function downloadCSV(points) {
   saveAs(blob, 'random_points.csv');
 }
 
+// Plot points on the map
+function plotPointsOnMap(points) {
+  // Clear existing markers
+  pointMarkers.clearLayers();
+
+  // Add new markers
+  points.forEach(function(coord) {
+    var marker = L.circleMarker([coord[1], coord[0]], {
+      radius: 5,
+      fillColor: '#ff7800',
+      color: '#000',
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+    pointMarkers.addLayer(marker);
+  });
+}
+
 // Instructions Modal Functionality
 var instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'), {});
 var instructionsBtn = document.getElementById('instructionsBtn');
@@ -125,6 +150,12 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     return;
   }
 
+  // Generate random points
   var points = generateRandomPoints(geojson.geometry, numPoints);
+
+  // Download CSV
   downloadCSV(points);
+
+  // Plot points on the map
+  plotPointsOnMap(points);
 });
