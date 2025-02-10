@@ -34,7 +34,7 @@
   <style>
     /* Map Styling */
     #map {
-      height: calc(100vh - 70px); /* Adjust height based on header */
+      height: 70vh; /* Adjust height based on header */
     }
     /* Adjust Leaflet Draw toolbar position */
     .leaflet-draw-toolbar {
@@ -48,9 +48,6 @@
   </style>
 </head>
 <body>
-  <!-- Ethical Ads Script in the Body -->
-  <div class="dark raised" data-ea-publisher="openanalysisorg" data-ea-type="text" data-ea-style="fixedfooter"></div>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Random Point Generator</a>
@@ -70,9 +67,9 @@
       </div>
     </div>
   </nav>
-
+  <!-- Ethical Ads Script in the Body -->
   <div id="map"></div>
-
+  <div class="dark raised horizontal" data-ea-publisher="openanalysisorg" data-ea-type="image" data-ea-style="stickybox" id="rpg"></div>
   <!-- Instructions Modal -->
   <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
